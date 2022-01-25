@@ -1,10 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-const Navbar = () => {
+interface IState {
+  isAuthenticated: boolean;
+}
+const Navbar: React.FC<IState> = ({ isAuthenticated }) => {
   return (
     <nav>
+      {/* Brand */}
       <Link to={'/'}>My Digital Garden</Link>
-      <Link to={'/Profile'}>Profile</Link>
+      {/* Check if authenticated and display different links */}
+      {isAuthenticated ? (
+        <Link to={'/profile'}>Profile</Link>
+      ) : (
+        <>
+          <Link to={'/login'}>Login</Link>
+          <Link to={'/register'}>Register</Link>
+        </>
+      )}
     </nav>
   );
 };
