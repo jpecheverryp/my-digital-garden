@@ -1,16 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import './App.css';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <Router>
       <div className='App'>
-        {/* TODO ADD NAVBAR COMPONENT */}
-        <nav>
-          <Link to={'/'}>Home</Link>
-          <Link to={'/Profile'}>Profile</Link>
-        </nav>
+        <Navbar />
         <main className='content'>
           <Routes>
             <Route path='/' element={<div>Home</div>} />
