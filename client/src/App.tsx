@@ -14,6 +14,9 @@ function App() {
   const authenticate = () => {
     setData({ ...data, isAuthenticated: true });
   };
+  const logout = () => {
+    setData({ ...data, isAuthenticated: false });
+  };
   // let navigate = useNavigate();
   // async function redirectToLogin() {
   //   navigate('/login');
@@ -29,7 +32,15 @@ function App() {
               path='/'
               element={<Home isAuthenticated={data.isAuthenticated} />}
             />
-            <Route path='/profile' element={<Profile />} />
+            <Route
+              path='/profile'
+              element={
+                <Profile
+                  isAuthenticated={data.isAuthenticated}
+                  logout={logout}
+                />
+              }
+            />
             <Route
               path='/login'
               element={
