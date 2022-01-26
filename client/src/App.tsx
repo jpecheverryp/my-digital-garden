@@ -39,7 +39,15 @@ function App() {
                 />
               }
             />
-            <Route path='/register' element={<Register />} />
+            <Route
+              path='/register'
+              element={
+                <Register
+                  isAuthenticated={data.isAuthenticated}
+                  authenticate={authenticate}
+                />
+              }
+            />
           </Routes>
         </main>
       </div>
