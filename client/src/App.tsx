@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  useNavigate,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
 import Home from './screens/Home';
@@ -16,6 +11,9 @@ function App() {
   const [data, setData] = useState({
     isAuthenticated: false,
   });
+  const authenticate = () => {
+    setData({ ...data, isAuthenticated: true });
+  };
   // let navigate = useNavigate();
   // async function redirectToLogin() {
   //   navigate('/login');
@@ -32,7 +30,15 @@ function App() {
               element={<Home isAuthenticated={data.isAuthenticated} />}
             />
             <Route path='/profile' element={<Profile />} />
-            <Route path='/login' element={<Login />} />
+            <Route
+              path='/login'
+              element={
+                <Login
+                  isAuthenticated={data.isAuthenticated}
+                  authenticate={authenticate}
+                />
+              }
+            />
             <Route path='/register' element={<Register />} />
           </Routes>
         </main>
