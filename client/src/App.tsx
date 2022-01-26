@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useNavigate,
+} from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
 import Home from './screens/Home';
@@ -11,13 +16,21 @@ function App() {
   const [data, setData] = useState({
     isAuthenticated: false,
   });
+  // let navigate = useNavigate();
+  // async function redirectToLogin() {
+  //   navigate('/login');
+  // }
+
   return (
     <Router>
       <div className='App'>
         <Navbar isAuthenticated={data.isAuthenticated} />
         <main className='content'>
           <Routes>
-            <Route path='/' element={<Home />} />
+            <Route
+              path='/'
+              element={<Home isAuthenticated={data.isAuthenticated} />}
+            />
             <Route path='/profile' element={<Profile />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
