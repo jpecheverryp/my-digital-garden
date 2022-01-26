@@ -48,6 +48,12 @@ app.post('/login', (req, res) => {
   res.json({ accessToken: accessToken, refreshToken: refreshToken });
 });
 
+app.delete('/logout', (req, res) => {
+  // TODO: DELETE FROM DB
+  refreshTokens = refreshTokens.filter((token) => token !== req.body.token);
+  res.sendStatus(204);
+});
+
 function generateAccessToken(user) {
   return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
     expiresIn: '45m',
