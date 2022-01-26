@@ -1,0 +1,30 @@
+{
+  "name": "my-digital-garden",
+  "version": "1.0.0",
+  "description": "PKM (Personal Knowledge Management)",
+  "main": "server.js",
+  "scripts": {
+    "devStart": "concurrently \"nodemon server.js\" \"npm run client\" ",
+    "client": "cd client && npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpecheverryp/my-digital-garden.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jpecheverryp/my-digital-garden/issues"
+  },
+  "homepage": "https://github.com/jpecheverryp/my-digital-garden#readme",
+  "dependencies": {
+    "dotenv": "^14.3.2",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0",
+    "nodemon": "^2.0.15"
+  }
+}
