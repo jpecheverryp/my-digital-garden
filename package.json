@@ -4,7 +4,8 @@
   "description": "PKM (Personal Knowledge Management)",
   "main": "server.js",
   "scripts": {
-    "devStart": "concurrently \"nodemon server.js\" \"npm run client\" ",
+    "start:dev": "concurrently \"npm run server\" \"npm run client\" ",
+    "server": "nodemon server.js",
     "client": "cd client && npm run start"
   },
   "repository": {
@@ -21,7 +22,9 @@
   "dependencies": {
     "dotenv": "^14.3.2",
     "express": "^4.17.2",
-    "jsonwebtoken": "^8.5.1"
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.14.1"
   },
   "devDependencies": {
     "concurrently": "^7.0.0",
