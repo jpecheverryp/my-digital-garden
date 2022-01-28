@@ -4,6 +4,7 @@ const app = express();
 const path = require('path');
 const sequelize = require('./config/connection');
 const jwt = require('jsonwebtoken');
+const auth = require('./middleware/auth');
 const {
   generateAccessToken,
   generateRefreshToken,
@@ -25,10 +26,13 @@ if (process.env.NODE_ENV === 'production') {
 
 const fakeData = [
   {
-    username: 'Juan',
+    id: 'e2c632a5-2b7c-4d62-a51f-9ce732f28bf7',
+    username: 'JuanDev',
     title: 'POST1',
   },
   {
+    id: 'e2c632a5-2b7c-4d62-a51f-9ce732f28bf7',
+
     username: 'Pablo',
     title: 'POST2',
   },
@@ -37,8 +41,8 @@ const fakeData = [
 // TODO: MOVE TO DATABASE
 let refreshTokens = [];
 
-app.get('/data', authenticateToken, (req, res) => {
-  res.json(fakeData.filter((thing) => thing.username === req.user.name));
+app.get('/data', auth, (req, res) => {
+  res.json(fakeData.filter((thing) => thing.id === req.user.id));
 });
 
 app.post('/token', (req, res) => {
@@ -53,33 +57,11 @@ app.post('/token', (req, res) => {
   return;
 });
 
-app.post('/login', (req, res) => {
-  const username = req.body.username;
-  //TODO: AUTHENTICATE USER
-  const user = { name: username };
-  const accessToken = generateAccessToken(user);
-  const refreshToken = generateRefreshToken(user);
-  refreshTokens.push(refreshToken); //TODO: insert this token in database
-  res.json({ accessToken: accessToken, refreshToken: refreshToken });
-});
-
 app.delete('/logout', (req, res) => {
   // TODO: DELETE FROM DB
   refreshTokens = refreshTokens.filter((token) => token !== req.body.token);
   res.sendStatus(204);
 });
-
-function authenticateToken(req, res, next) {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-  if (token === null) return res.sendStatus(401);
-
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    if (err) return res.sendStatus(403);
-    req.user = user;
-    next();
-  });
-}
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () =>
