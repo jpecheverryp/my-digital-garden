@@ -7,7 +7,7 @@ const {
 // User Model
 const { User } = require('../../models');
 
-//  @route   POST api/users
+//  @route   POST /api/users
 //  @desc    Register new user
 //  @access  public
 router.post('/', async (req, res) => {
