@@ -1,13 +1,14 @@
 require('dotenv').config();
-
 const express = require('express');
 const app = express();
-const jwt = require('jsonwebtoken');
 const path = require('path');
+const sequelize = require('./config/connection');
+const jwt = require('jsonwebtoken');
 
 const PORT = 5000;
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(require('./routes'));
 
@@ -86,6 +87,8 @@ function authenticateToken(req, res, next) {
   });
 }
 
-app.listen(PORT, () => {
-  console.log('Server listening in http://localhost:' + PORT);
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () =>
+    console.log('Server listening in http://localhost:' + PORT)
+  );
 });
