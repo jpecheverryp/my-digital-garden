@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
+const auth = require('../../middleware/auth');
+
 const {
   generateAccessToken,
   generateRefreshToken,
@@ -43,6 +45,17 @@ router.post('/', async (req, res) => {
   } catch (err) {
     if (err) return res.status(500).send(err);
   }
+});
+
+//  @route   GET /api/auth/user
+//  @desc    Authenticate new user
+//  @access  Private
+router.get('/user', auth, async (req, res) => {
+  const user = await User.findOne({
+    where: { id: req.user.id },
+    attributes: { exclude: ['password'] },
+  });
+  res.status(200).json(user);
 });
 
 module.exports = router;
