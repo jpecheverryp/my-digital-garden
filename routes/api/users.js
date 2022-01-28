@@ -1,5 +1,9 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
+const {
+  generateAccessToken,
+  generateRefreshToken,
+} = require('../../utils/generateTokens');
 // User Model
 const { User } = require('../../models');
 
@@ -34,7 +38,11 @@ router.post('/', async (req, res) => {
       email,
       password: hashedPW,
     });
+    const accessToken = generateAccessToken(newUser.id);
+    const refreshToken = generateRefreshToken(newUser.id);
     return res.status(200).send({
+      accessToken,
+      refreshToken,
       user: {
         id: newUser.id,
         username: newUser.username,

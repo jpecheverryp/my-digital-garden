@@ -4,7 +4,10 @@ const app = express();
 const path = require('path');
 const sequelize = require('./config/connection');
 const jwt = require('jsonwebtoken');
-
+const {
+  generateAccessToken,
+  generateRefreshToken,
+} = require('./utils/generateTokens');
 const PORT = 5000;
 
 app.use(express.json());
@@ -65,15 +68,6 @@ app.delete('/logout', (req, res) => {
   refreshTokens = refreshTokens.filter((token) => token !== req.body.token);
   res.sendStatus(204);
 });
-
-function generateAccessToken(user) {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
-    expiresIn: '45m',
-  });
-}
-function generateRefreshToken(user) {
-  return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
-}
 
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
