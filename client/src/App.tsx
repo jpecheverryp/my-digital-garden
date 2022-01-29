@@ -1,5 +1,4 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
@@ -11,26 +10,16 @@ import Register from './screens/Register';
 function App() {
   const [data, setData] = useState({
     isAuthenticated: false,
-    username: 'Juan',
+    username: '',
   });
-  useEffect(() => {
-    axios({
-      method: 'GET',
-      url: '/api/auth/user',
-    })
-      .then((response) => console.log(response))
-      .catch((err) => console.log(err));
-  }, []);
-  const authenticate = () => {
-    setData({ ...data, isAuthenticated: true });
-  };
+
   const logout = () => {
     setData({ ...data, isAuthenticated: false });
   };
-  // let navigate = useNavigate();
-  // async function redirectToLogin() {
-  //   navigate('/login');
-  // }
+
+  const setUser = (user: string) => {
+    setData({ ...data, username: user });
+  };
 
   return (
     <Router>
@@ -54,22 +43,9 @@ function App() {
             />
             <Route
               path='/login'
-              element={
-                <Login
-                  isAuthenticated={data.isAuthenticated}
-                  authenticate={authenticate}
-                />
-              }
+              element={<Login isAuthenticated={data.isAuthenticated} />}
             />
-            <Route
-              path='/register'
-              element={
-                <Register
-                  isAuthenticated={data.isAuthenticated}
-                  authenticate={authenticate}
-                />
-              }
-            />
+            <Route path='/register' element={<Register setUser={setUser} />} />
           </Routes>
         </main>
       </div>

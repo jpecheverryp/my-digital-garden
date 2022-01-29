@@ -1,19 +1,31 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { setAccessToken, setRefreshToken } from '../utils/cookiesHandler';
+import axios from 'axios';
 
 interface IState {
   isAuthenticated: boolean;
-  authenticate: Function;
 }
 
-const Login: React.FC<IState> = ({ isAuthenticated, authenticate }) => {
+const Login: React.FC<IState> = ({ isAuthenticated }) => {
   let navigate = useNavigate();
   async function redirectToHome() {
     navigate('/');
   }
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    authenticate();
+    const authData = await axios({
+      method: 'POST',
+      url: '/api/auth',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: { email: 'j@email.com', password: 'password' },
+    });
+    console.log(authData);
+    setAccessToken(authData.data.accessToken);
+    setRefreshToken(authData.data.refreshToken);
+
     redirectToHome();
   };
   return (
