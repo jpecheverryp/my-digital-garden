@@ -26,13 +26,19 @@ const Register: React.FC<IProps> = ({ setUser }) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      // Send POST request
       const { data } = await axios({
         method: 'POST',
         url: '/api/users',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         data: formData,
       });
+      // Set tokens to cookies
       setAccessToken(data.accessToken);
       setRefreshToken(data.refreshToken);
+      //Set username in app state
       setUser(data.user.username);
       redirectTo(navigate, '/profile');
     } catch (err) {

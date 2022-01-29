@@ -41,10 +41,7 @@ function App() {
                 />
               }
             />
-            <Route
-              path='/login'
-              element={<Login isAuthenticated={data.isAuthenticated} />}
-            />
+            <Route path='/login' element={<Login setUser={setUser} />} />
             <Route path='/register' element={<Register setUser={setUser} />} />
           </Routes>
         </main>
