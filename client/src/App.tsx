@@ -12,13 +12,12 @@ function App() {
     isAuthenticated: false,
     username: '',
   });
-
   const logout = () => {
     setData({ ...data, isAuthenticated: false });
   };
 
   const setUser = (user: string) => {
-    setData({ ...data, username: user });
+    setData({ ...data, username: user, isAuthenticated: true });
   };
 
   return (

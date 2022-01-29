@@ -1,5 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import {
+  destroyAccessToken,
+  destroyRefreshToken,
+} from '../utils/cookiesHandler';
+import { redirectTo } from '../utils/redirectTo';
 
 interface IState {
   isAuthenticated: boolean;
@@ -7,14 +12,14 @@ interface IState {
   username: string;
 }
 
-const Profile: React.FC<IState> = ({ isAuthenticated, logout, username }) => {
+const Profile: React.FC<IState> = ({ logout, username }) => {
   let navigate = useNavigate();
-  async function redirectToLogin() {
-    navigate('/');
-  }
+
   const handleLogout = () => {
     logout();
-    redirectToLogin();
+    destroyAccessToken();
+    destroyRefreshToken();
+    redirectTo(navigate, '/login');
   };
   return (
     <div>
