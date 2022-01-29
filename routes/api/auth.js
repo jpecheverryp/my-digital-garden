@@ -30,8 +30,8 @@ router.post('/', async (req, res) => {
     if (!(await bcrypt.compare(password, user.password))) {
       return res.status(400).json({ message: 'Invalid Password' });
     }
-    const accessToken = generateAccessToken(user.id);
-    const refreshToken = generateRefreshToken(user.id);
+    const accessToken = generateAccessToken(user.id, user.username);
+    const refreshToken = generateRefreshToken(user.id, user.username);
 
     return res.status(200).send({
       accessToken,

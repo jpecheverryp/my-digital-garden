@@ -38,8 +38,8 @@ router.post('/', async (req, res) => {
       email,
       password: hashedPW,
     });
-    const accessToken = generateAccessToken(newUser.id);
-    const refreshToken = generateRefreshToken(newUser.id);
+    const accessToken = generateAccessToken(newUser.id, newUser.username);
+    const refreshToken = generateRefreshToken(newUser.id, newUser.username);
     return res.status(200).send({
       accessToken,
       refreshToken,

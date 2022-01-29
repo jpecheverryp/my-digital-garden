@@ -36,7 +36,9 @@ const fakeData = [
 ];
 
 // TODO: MOVE TO DATABASE
-let refreshTokens = [];
+let refreshTokens = [
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImUyYzYzMmE1LTJiN2MtNGQ2Mi1hNTFmLTljZTczMmYyOGJmNyIsInVzZXJuYW1lIjoiSnVhbkRldiIsImlhdCI6MTY0MzQ5NjIxOH0._Q_Zgi8kPLWmStvaN6irEDiQbuN1N0kfeI77MpXfEA0',
+];
 
 app.get('/data', auth, (req, res) => {
   res.json(fakeData.filter((thing) => thing.id === req.user.id));
@@ -47,9 +49,10 @@ app.post('/token', (req, res) => {
   if (refreshToken === null) return res.sendStatus(401);
   if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403);
   jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+    console.log(user);
     if (err) return res.sendStatus(403);
-    const accessToken = generateAccessToken({ name: user.name });
-    res.json({ accessToken: accessToken });
+    const accessToken = generateAccessToken(user.id, user.username);
+    res.json({ accessToken: accessToken, username: user.username });
   });
   return;
 });
