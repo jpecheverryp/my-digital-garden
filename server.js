@@ -5,10 +5,7 @@ const path = require('path');
 const sequelize = require('./config/connection');
 const jwt = require('jsonwebtoken');
 const auth = require('./middleware/auth');
-const {
-  generateAccessToken,
-  generateRefreshToken,
-} = require('./utils/generateTokens');
+const { generateAccessToken } = require('./utils/generateTokens');
 const PORT = 5000;
 
 app.use(express.json());

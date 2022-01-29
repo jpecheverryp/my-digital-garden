@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
@@ -10,7 +11,16 @@ import Register from './screens/Register';
 function App() {
   const [data, setData] = useState({
     isAuthenticated: false,
+    username: 'Juan',
   });
+  useEffect(() => {
+    axios({
+      method: 'GET',
+      url: '/api/auth/user',
+    })
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
+  }, []);
   const authenticate = () => {
     setData({ ...data, isAuthenticated: true });
   };
@@ -38,6 +48,7 @@ function App() {
                 <Profile
                   isAuthenticated={data.isAuthenticated}
                   logout={logout}
+                  username={data.username}
                 />
               }
             />
