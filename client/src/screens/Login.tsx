@@ -36,7 +36,7 @@ const Login: React.FC<IProps> = ({ setUser }) => {
       setAccessToken(data.accessToken);
       setRefreshToken(data.refreshToken);
       setUser(data.user.username);
-      redirectTo(navigate, '/profile');
+      redirectTo(navigate, '/');
     } catch (err) {
       console.log(err);
     }

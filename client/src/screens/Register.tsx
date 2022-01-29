@@ -40,7 +40,7 @@ const Register: React.FC<IProps> = ({ setUser }) => {
       setRefreshToken(data.refreshToken);
       //Set username in app state
       setUser(data.user.username);
-      redirectTo(navigate, '/profile');
+      redirectTo(navigate, '/');
     } catch (err) {
       console.log(err);
     }
