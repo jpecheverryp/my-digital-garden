@@ -29,7 +29,7 @@ function App() {
       try {
         const { data } = await axios({
           method: 'POST',
-          url: '/token',
+          url: '/api/auth/token',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -55,6 +55,7 @@ function App() {
   return (
     <div className='App'>
       <Navbar isAuthenticated={data.isAuthenticated} />
+
       <main className='content'>
         <Routes>
           <Route

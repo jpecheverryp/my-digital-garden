@@ -1,8 +1,10 @@
+import axios from 'axios';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   destroyAccessToken,
   destroyRefreshToken,
+  getRefreshToken,
 } from '../utils/cookiesHandler';
 import { redirectTo } from '../utils/redirectTo';
 
@@ -16,10 +18,23 @@ const Profile: React.FC<IState> = ({ logout, username }) => {
   let navigate = useNavigate();
 
   const handleLogout = () => {
-    logout();
-    destroyAccessToken();
-    destroyRefreshToken();
-    redirectTo(navigate, '/login');
+    axios({
+      method: 'DELETE',
+      url: '/api/auth/logout',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: {
+        token: getRefreshToken(),
+      },
+    })
+      .then((success) => {
+        logout();
+        destroyAccessToken();
+        destroyRefreshToken();
+        redirectTo(navigate, '/login');
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <div>

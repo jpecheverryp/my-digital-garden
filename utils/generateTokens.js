@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-
+const { Token } = require('../models');
 function generateAccessToken(id, username) {
   return jwt.sign(
     {
@@ -13,12 +13,16 @@ function generateAccessToken(id, username) {
   );
 }
 function generateRefreshToken(id, username) {
-  return jwt.sign(
+  const refreshToken = jwt.sign(
     {
       id: id,
       username: username,
     },
     process.env.REFRESH_TOKEN_SECRET
   );
+  Token.create({
+    token: refreshToken,
+  });
+  return refreshToken;
 }
 module.exports = { generateAccessToken, generateRefreshToken };

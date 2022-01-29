@@ -1,13 +1,13 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const auth = require('../../middleware/auth');
-
+const jwt = require('jsonwebtoken');
 const {
   generateAccessToken,
   generateRefreshToken,
 } = require('../../utils/generateTokens');
 // User Model
-const { User } = require('../../models');
+const { User, Token } = require('../../models');
 
 //  @route   POST /api/auth
 //  @desc    Authenticate new user
@@ -56,6 +56,47 @@ router.get('/user', auth, async (req, res) => {
     attributes: { exclude: ['password'] },
   });
   res.status(200).json(user);
+});
+
+//  @route   DELETE /api/auth/logout
+//  @desc    Destroy Refresh Token
+//  @access  Public
+router.delete('/logout', async (req, res) => {
+  try {
+    const token = await Token.destroy({
+      where: {
+        token: req.body.token,
+      },
+    });
+    return res.sendStatus(204);
+  } catch (error) {
+    return res.sendStatus(500);
+  }
+});
+
+//  @route   DELETE /api/auth/token
+//  @desc    Generate Access Token using Refresh Token
+//  @access  Public
+router.post('/token', async (req, res) => {
+  const refreshToken = req.body.token;
+  if (refreshToken === null) return res.sendStatus(401);
+  try {
+    const foundOne = await Token.findOne({
+      where: {
+        token: refreshToken,
+      },
+    });
+    if (!foundOne) return res.status(403);
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+      if (err) return res.sendStatus(403);
+      const accessToken = generateAccessToken(user.id, user.username);
+      res.json({ accessToken: accessToken, username: user.username });
+    });
+    return;
+  } catch (error) {
+    console.log(error);
+    res.status(403);
+  }
 });
 
 module.exports = router;
