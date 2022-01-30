@@ -9,7 +9,6 @@ import {
 import { redirectTo } from '../utils/redirectTo';
 
 interface IState {
-  isAuthenticated: boolean;
   logout: Function;
   username: string;
 }
