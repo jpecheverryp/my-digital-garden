@@ -42,12 +42,13 @@ const Login: React.FC<IProps> = ({ setUser }) => {
     }
   };
   return (
-    <div>
+    <div className='auth-container'>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor='email'>Email:</label>
           <input
+            className='form-input'
             onChange={handleChange}
             autoComplete='email'
             type='email'
@@ -59,6 +60,7 @@ const Login: React.FC<IProps> = ({ setUser }) => {
         <div>
           <label htmlFor='password'>Password:</label>
           <input
+            className='form-input'
             onChange={handleChange}
             autoComplete='current-password'
             type='password'
@@ -67,7 +69,9 @@ const Login: React.FC<IProps> = ({ setUser }) => {
             required
           />
         </div>
-        <button type='submit'>LOGIN</button>
+        <button className='btn' type='submit'>
+          Log In
+        </button>
       </form>
     </div>
   );
