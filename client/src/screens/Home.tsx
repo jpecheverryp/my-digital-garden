@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import NoteList from '../components/NoteList';
 import { getAccessToken } from '../utils/cookiesHandler';
 import { redirectTo } from '../utils/redirectTo';
 interface IState {
@@ -14,22 +15,26 @@ const Home: React.FC<IState> = ({ isAuthenticated }) => {
       redirectTo(navigate, '/login');
       return;
     }
-    // const token = 'Bearer ' + getAccessToken();
-    // axios({
-    //   method: 'GET',
-    //   url: '/data',
-    //   headers: {
-    //     'x-auth-token': token,
-    //   },
-    // })
-    //   .then((data) => console.log(data.data))
-    //   .catch((err) => console.log(err));
   }, []);
+  const notes = [
+    {
+      note_name: 'Design Patterns',
+      created_at: new Date(),
+    },
+    {
+      note_name: 'Singleton Pattern',
+      created_at: new Date(),
+    },
+    {
+      note_name: 'Facade Pattern',
+      created_at: new Date(),
+    },
+  ];
 
   return (
     <section>
-      <h1>Home</h1>
-      {/* <p>{fakeData}</p> */}
+      <h1 className='light-text'>Home</h1>
+      <NoteList notes={notes} />
     </section>
   );
 };

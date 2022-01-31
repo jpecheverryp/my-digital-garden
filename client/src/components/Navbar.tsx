@@ -5,7 +5,7 @@ interface IState {
 }
 const Navbar: React.FC<IState> = ({ isAuthenticated }) => {
   return (
-    <nav>
+    <nav className='navbar'>
       {/* Brand */}
       <Link to={'/'}>My Digital Garden</Link>
       {/* Check if authenticated and display different links */}

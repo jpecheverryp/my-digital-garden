@@ -37,9 +37,11 @@ const Profile: React.FC<IState> = ({ logout, username }) => {
   };
   return (
     <div>
-      <h2>Profile</h2>
-      <h3>{username}</h3>
-      <button onClick={handleLogout}>Log Out</button>
+      <h2 className='light-text'>Profile</h2>
+      <h3 className='light-text'>{username}</h3>
+      <button className='btn' onClick={handleLogout}>
+        Log Out
+      </button>
     </div>
   );
 };

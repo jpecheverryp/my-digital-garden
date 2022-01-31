@@ -3,6 +3,10 @@ body {
   background-color: #051821;
 }
 
+.light-text {
+  color: #d3f8fc;
+}
+
 .auth-container {
   position: relative;
   display: block;
@@ -32,5 +36,33 @@ body {
 
 .btn:hover {
   background-color: #f8bc24;
+}
+
+.navbar {
+  background: #0c8054;
+  color: #051821;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  padding: 1rem;
+}
+
+.navbar a {
+  color: #051821;
+  text-decoration: none;
+}
+
+.content {
+  padding: 0 1rem;
+}
+
+.note-preview {
+  border: 1px red solid;
+  margin-bottom: 0.5rem;
+  padding: 1rem;
+  background: #d3f8fc;
+  color: #051821;
 }
 /*# sourceMappingURL=App.css.map */

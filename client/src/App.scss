@@ -1,11 +1,15 @@
-$background-color: #051821;
+$dark-color: #051821;
 $theme-color: #0c8054;
 $cta-color: #f58800;
 $cta-hover-color: #f8bc24;
+$light-color: #d3f8fc;
 
 body {
   font-size: 1.5rem;
-  background-color: $background-color;
+  background-color: $dark-color;
+}
+.light-text {
+  color: $light-color;
 }
 
 .auth-container {
@@ -34,4 +38,28 @@ body {
   &:hover {
     background-color: $cta-hover-color;
   }
+}
+
+.navbar {
+  background: $theme-color;
+  color: $dark-color;
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+  a {
+    color: $dark-color;
+    text-decoration: none;
+  }
+}
+
+.content {
+  padding: 0 1rem;
+}
+
+.note-preview {
+  border: 1px red solid;
+  margin-bottom: 0.5rem;
+  padding: 1rem;
+  background: $light-color;
+  color: $dark-color;
 }
