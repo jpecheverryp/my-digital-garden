@@ -10,8 +10,8 @@ interface IProps {
 const NoteList: React.FC<IProps> = ({ notes }) => {
   return (
     <div>
-      {notes.map((note) => (
-        <NotePreview note={note} />
+      {notes.map((note, index) => (
+        <NotePreview key={index} note={note} />
       ))}
     </div>
   );
