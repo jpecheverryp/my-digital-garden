@@ -1,5 +1,7 @@
 # my-digital-garden
 
+## Overview
+
 This project is a PKM (Personal Knowledge Management) or Zettelkasten App.
 The purpose is to be able to create notes or slips or inforamtion that you can connect with other notes to create new ideas and find new connections.
 
@@ -7,20 +9,28 @@ It will be put live as soon as the MVP is ready.
 
 ## Images
 
-### Pre-MVP - Jan 31st 2022
+### Pre-MVP
 
-#### Wireframe
+- February 1st 2022
 
-![Digital Garden Wireframe](./assets/images/DigitalGardenWireframe.png)
+  #### Dashboard with map placeholder
 
-#### Login Page
+  ![Dashboard with Map](./assets/images/DashboardWithMap.png)
 
-![Login page](./assets/images/LoginPage.png)
+- Jan 31st 2022
 
-#### Register Page
+  #### Wireframe
 
-![Registration page](./assets/images/RegisterPage.png)
+  ![Digital Garden Wireframe](./assets/images/DigitalGardenWireframe.png)
 
-#### Dashboard
+  #### Login Page
 
-![Dashboardpage](./assets/images/Dashboard.png)
+  ![Login page](./assets/images/LoginPage.png)
+
+  #### Register Page
+
+  ![Registration page](./assets/images/RegisterPage.png)
+
+  #### Dashboard
+
+  ![Dashboardpage](./assets/images/Dashboard.png)
