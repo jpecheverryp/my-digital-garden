@@ -1,2 +1,26 @@
 # my-digital-garden
-PKM (Personal Knowledge Management)
+
+This project is a PKM (Personal Knowledge Management) or Zettelkasten App.
+The purpose is to be able to create notes or slips or inforamtion that you can connect with other notes to create new ideas and find new connections.
+
+It will be put live as soon as the MVP is ready.
+
+## Images
+
+### Pre-MVP - Jan 31st 2022
+
+#### Wireframe
+
+![Digital Garden Wireframe](./assets/images/DigitalGardenWireframe.png)
+
+#### Login Page
+
+![Login page](./assets/images/LoginPage.png)
+
+#### Register Page
+
+![Registration page](./assets/images/RegisterPage.png)
+
+#### Dashboard
+
+![Dashboardpage](./assets/images/Dashboard.png)
