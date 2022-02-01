@@ -40,7 +40,7 @@ body {
 
 .navbar {
   background: #0c8054;
-  color: #051821;
+  color: #d3f8fc;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -50,7 +50,7 @@ body {
 }
 
 .navbar a {
-  color: #051821;
+  color: #d3f8fc;
   text-decoration: none;
 }
 
@@ -69,5 +69,35 @@ body {
 .note-preview:hover {
   background-color: #0c8054;
   color: #d3f8fc;
+}
+
+.dashboard-cols {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.notes-list {
+  min-width: 50%;
+}
+
+.map-container {
+  min-width: 40%;
+  margin: 0 1rem 1rem;
+}
+
+.map {
+  background-color: #d3f8fc;
+  border-radius: 1rem;
+  padding-top: 100%;
+  width: 100%;
 }
 /*# sourceMappingURL=App.css.map */

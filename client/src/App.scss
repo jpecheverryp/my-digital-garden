@@ -42,12 +42,12 @@ body {
 
 .navbar {
   background: $theme-color;
-  color: $dark-color;
+  color: $light-color;
   display: flex;
   justify-content: space-around;
   padding: 1rem;
   a {
-    color: $dark-color;
+    color: $light-color;
     text-decoration: none;
   }
 }
@@ -67,4 +67,24 @@ body {
     background-color: $theme-color;
     color: $light-color;
   }
+}
+.dashboard-cols {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+}
+
+.notes-list {
+  min-width: 50%;
+}
+.map-container {
+  min-width: 40%;
+  margin: 0 1rem 1rem;
+}
+.map {
+  background-color: $light-color;
+  border-radius: 1rem;
+  padding-top: 100%;
+  width: 100%;
 }
