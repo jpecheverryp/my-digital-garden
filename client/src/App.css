@@ -63,5 +63,11 @@ body {
   padding: 1rem;
   background: #d3f8fc;
   color: #051821;
+  border-radius: 1rem;
+}
+
+.note-preview:hover {
+  background-color: #0c8054;
+  color: #d3f8fc;
 }
 /*# sourceMappingURL=App.css.map */

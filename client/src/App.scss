@@ -62,4 +62,9 @@ body {
   padding: 1rem;
   background: $light-color;
   color: $dark-color;
+  border-radius: 1rem;
+  &:hover {
+    background-color: $theme-color;
+    color: $light-color;
+  }
 }
