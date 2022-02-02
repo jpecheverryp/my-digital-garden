@@ -3,6 +3,7 @@ import NotePreview from './NotePreview';
 
 interface IProps {
   notes: {
+    id: number;
     note_name: string;
     created_at: Date;
   }[];

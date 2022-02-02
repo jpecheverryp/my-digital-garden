@@ -14,6 +14,7 @@ import Home from './screens/Home';
 import Login from './screens/Login';
 import Profile from './screens/Profile';
 import Register from './screens/Register';
+import NoteView from './components/NoteView';
 
 function App() {
   // Needed to redirect
@@ -72,6 +73,7 @@ function App() {
           />
           <Route path='/login' element={<Login setUser={setUser} />} />
           <Route path='/register' element={<Register setUser={setUser} />} />
+          <Route path='/note/:id' element={<NoteView />} />
         </Routes>
       </main>
     </div>
