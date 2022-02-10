@@ -8,7 +8,9 @@ const auth = require('../../middleware/auth');
 router.get('/', async (req, res) => {
   try {
     const notes = await Note.findAll({
-      attributes: { include: ['id', 'title', 'text', 'createdAt', 'userId'] },
+      attributes: {
+        exclude: ['userId'],
+      },
     });
     return res.json(notes);
   } catch (err) {
