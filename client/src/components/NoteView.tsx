@@ -5,7 +5,7 @@ const NoteView = () => {
   const params = useParams();
   console.log(params);
 
-  return <div>Hello</div>;
+  return <div>Hello {params.id}</div>;
 };
 
 export default NoteView;

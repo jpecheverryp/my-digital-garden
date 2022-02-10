@@ -98,7 +98,7 @@ const Register: React.FC<IProps> = ({ setUser }) => {
             />
           </FormControl>
 
-          <Button colorScheme={'orange'} type='submit'>
+          <Button colorScheme={'orange'} w={'100%'} type='submit'>
             Sign Up
           </Button>
         </form>

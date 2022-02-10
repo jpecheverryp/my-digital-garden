@@ -11,7 +11,7 @@ interface IProps {
 }
 const NoteList: React.FC<IProps> = ({ notes }) => {
   return (
-    <Box>
+    <Box w={'80%'}>
       {notes.map((note, index) => (
         <NotePreview key={index} note={note} />
       ))}

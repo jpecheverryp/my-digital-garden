@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Link, Flex, Box } from '@chakra-ui/react';
+import { Link, Flex, Box, Button } from '@chakra-ui/react';
 
 interface IState {
   isAuthenticated: boolean;
@@ -8,7 +8,7 @@ interface IState {
 const Navbar: React.FC<IState> = ({ isAuthenticated }) => {
   return (
     <Flex
-      bg={'green.300'}
+      bg={'gray.400'}
       p={4}
       justifyContent={'space-between'}
       alignItems={'center'}
@@ -19,9 +19,14 @@ const Navbar: React.FC<IState> = ({ isAuthenticated }) => {
       </Link>
       {/* Check if authenticated and display different links */}
       {isAuthenticated ? (
-        <Link as={RouterLink} to={'/profile'}>
-          Profile
-        </Link>
+        <Box>
+          <Button p={2} mr={2} colorScheme={'blue'}>
+            Add note
+          </Button>
+          <Link as={RouterLink} to={'/profile'}>
+            Profile
+          </Link>
+        </Box>
       ) : (
         <Box>
           <Link as={RouterLink} to={'/login'} pr={3}>

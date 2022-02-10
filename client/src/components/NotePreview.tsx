@@ -18,23 +18,19 @@ const NotePreview: React.FC<IProps> = ({ note }) => {
     redirectTo(navigate, '/note/' + note.id);
   };
   return (
-    <Flex mb={3}>
-      <Button
-        id={'note-' + note.id}
-        onClick={handleClick}
-        d={'block'}
-        w={'100%'}
-        bg={'green.300'}
-        borderRadius={'10px 0 0 10px'} // TopLeft, TopRight, BotRight, BotLeft
-      >
-        {note.note_name} - Created At: {note.created_at.getDate()}/
-        {note.created_at.getMonth() + 1}/{note.created_at.getFullYear() - 2000}
-      </Button>
-
-      <Button bg={'red.300'} borderRadius={'0 10px 10px 0'}>
-        D
-      </Button>
-    </Flex>
+    <Button
+      id={'note-' + note.id}
+      onClick={handleClick}
+      d={'block'}
+      w={'100%'}
+      mb={3}
+      bg={'gray.300'}
+      borderRadius={'10px'}
+      textAlign={'left'}
+    >
+      {note.note_name} - Created At: {note.created_at.getDate()}/
+      {note.created_at.getMonth() + 1}/{note.created_at.getFullYear() - 2000}
+    </Button>
   );
 };
 

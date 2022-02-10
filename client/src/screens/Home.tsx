@@ -9,7 +9,7 @@ const Home: React.FC<IState> = () => {
   const notes = [
     {
       id: 1,
-      note_name: 'Design Patterns',
+      note_name: 'Central Nervous System',
       created_at: new Date(),
     },
     {
