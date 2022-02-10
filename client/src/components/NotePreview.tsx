@@ -13,14 +13,18 @@ interface IProps {
 
 const NotePreview: React.FC<IProps> = ({ note }) => {
   let navigate = useNavigate();
-  const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     redirectTo(navigate, '/note/' + note.id);
   };
   return (
-    <div id={'note-' + note.id} className='note-preview' onClick={handleClick}>
+    <button
+      id={'note-' + note.id}
+      className='note-preview'
+      onClick={handleClick}
+    >
       {note.note_name} - Created At: {note.created_at.getDate()}/
       {note.created_at.getMonth() + 1}/{note.created_at.getFullYear() - 2000}
-    </div>
+    </button>
   );
 };
 
