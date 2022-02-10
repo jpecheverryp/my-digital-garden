@@ -1,3 +1,4 @@
+import { Box, Button, Flex } from '@chakra-ui/react';
 import React from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { redirectTo } from '../utils/redirectTo';
@@ -17,14 +18,23 @@ const NotePreview: React.FC<IProps> = ({ note }) => {
     redirectTo(navigate, '/note/' + note.id);
   };
   return (
-    <button
-      id={'note-' + note.id}
-      className='note-preview'
-      onClick={handleClick}
-    >
-      {note.note_name} - Created At: {note.created_at.getDate()}/
-      {note.created_at.getMonth() + 1}/{note.created_at.getFullYear() - 2000}
-    </button>
+    <Flex mb={3}>
+      <Button
+        id={'note-' + note.id}
+        onClick={handleClick}
+        d={'block'}
+        w={'100%'}
+        bg={'green.300'}
+        borderRadius={'10px 0 0 10px'} // TopLeft, TopRight, BotRight, BotLeft
+      >
+        {note.note_name} - Created At: {note.created_at.getDate()}/
+        {note.created_at.getMonth() + 1}/{note.created_at.getFullYear() - 2000}
+      </Button>
+
+      <Button bg={'red.300'} borderRadius={'0 10px 10px 0'}>
+        D
+      </Button>
+    </Flex>
   );
 };
 

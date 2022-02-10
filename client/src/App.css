@@ -25,34 +25,8 @@
   background-color: #f58800;
 }
 
-.btn:hover {
-  background-color: #f8bc24;
-}
-
-.navbar {
-  color: #d3f8fc;
-
-  justify-content: space-around;
-  padding: 1rem;
-}
-
 .content {
   padding: 0 1rem;
-}
-
-.note-preview {
-  display: block;
-  width: 100%;
-  margin-bottom: 0.5rem;
-  padding: 1rem;
-  background: #d3f8fc;
-  color: #051821;
-  border-radius: 1rem;
-}
-
-.note-preview:hover {
-  background-color: #0c8054;
-  color: #d3f8fc;
 }
 
 .dashboard-cols {
@@ -67,10 +41,6 @@
   flex-direction: row-reverse;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-}
-
-.notes-list {
-  min-width: 60%;
 }
 
 .map-container {
