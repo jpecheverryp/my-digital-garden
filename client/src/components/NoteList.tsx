@@ -4,9 +4,9 @@ import NotePreview from './NotePreview';
 
 interface IProps {
   notes: {
-    id: number;
-    note_name: string;
-    created_at: Date;
+    id: string;
+    title: string;
+    createdAt: string;
   }[];
 }
 const NoteList: React.FC<IProps> = ({ notes }) => {

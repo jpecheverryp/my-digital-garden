@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
   try {
     const notes = await Note.findAll({
       attributes: {
-        exclude: ['userId'],
+        exclude: ['userId', 'text'],
       },
     });
     return res.json(notes);

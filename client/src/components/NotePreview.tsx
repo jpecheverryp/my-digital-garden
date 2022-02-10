@@ -1,14 +1,14 @@
-import { Box, Button, Flex } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
 import React from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { dateFormat } from '../utils/dateFormat';
 import { redirectTo } from '../utils/redirectTo';
-import NoteView from './NoteView';
 
 interface IProps {
   note: {
-    id: number;
-    note_name: string;
-    created_at: Date;
+    id: string;
+    title: string;
+    createdAt: string;
   };
 }
 
@@ -17,6 +17,7 @@ const NotePreview: React.FC<IProps> = ({ note }) => {
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     redirectTo(navigate, '/note/' + note.id);
   };
+  const date = dateFormat(note.createdAt);
   return (
     <Button
       id={'note-' + note.id}
@@ -28,8 +29,7 @@ const NotePreview: React.FC<IProps> = ({ note }) => {
       borderRadius={'10px'}
       textAlign={'left'}
     >
-      {note.note_name} - Created At: {note.created_at.getDate()}/
-      {note.created_at.getMonth() + 1}/{note.created_at.getFullYear() - 2000}
+      {note.title} - Created At: {date}
     </Button>
   );
 };

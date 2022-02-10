@@ -1,43 +1,15 @@
 import { Box } from '@chakra-ui/react';
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import NoteList from '../components/NoteList';
 
-interface IState {
-  isAuthenticated: boolean;
-}
-const Home: React.FC<IState> = () => {
-  const notes = [
-    {
-      id: 1,
-      note_name: 'Central Nervous System',
-      created_at: new Date(),
-    },
-    {
-      id: 2,
-      note_name: 'Singleton Pattern',
-      created_at: new Date(),
-    },
-    {
-      id: 3,
-      note_name: 'Facade Pattern',
-      created_at: new Date(),
-    },
-    {
-      id: 4,
-      note_name: 'Design Patterns',
-      created_at: new Date(),
-    },
-    {
-      id: 5,
-      note_name: 'Singleton Pattern',
-      created_at: new Date(),
-    },
-    {
-      id: 6,
-      note_name: 'Facade Pattern',
-      created_at: new Date(),
-    },
-  ];
+const Home: React.FC = () => {
+  const [notes, setNotes] = useState([{ id: '', title: '', createdAt: '' }]);
+  useEffect(() => {
+    axios.get('/api/notes', {}).then((data) => {
+      setNotes(data.data);
+    });
+  }, []);
 
   return (
     <Box>

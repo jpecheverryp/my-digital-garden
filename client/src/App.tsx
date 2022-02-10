@@ -62,10 +62,7 @@ function App() {
 
       <Box className='content' pt={3} px={2}>
         <Routes>
-          <Route
-            path='/'
-            element={<Home isAuthenticated={data.isAuthenticated} />}
-          />
+          <Route path='/' element={<Home />} />
           <Route
             path='/profile'
             element={<Profile logout={logout} username={data.username} />}
