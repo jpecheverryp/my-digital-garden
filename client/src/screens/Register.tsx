@@ -1,3 +1,11 @@
+import {
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Heading,
+  Input,
+} from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -46,51 +54,56 @@ const Register: React.FC<IProps> = ({ setUser }) => {
     }
   };
   return (
-    <div className='auth-container'>
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor='username'>Username:</label>
-          <input
-            className='form-input'
-            onChange={handleChange}
-            autoComplete='username'
-            type='text'
-            name='username'
-            id='username'
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor='email'>Email:</label>
-          <input
-            className='form-input'
-            onChange={handleChange}
-            autoComplete='email'
-            type='email'
-            name='email'
-            id='email'
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor='password'>Password:</label>
-          <input
-            className='form-input'
-            onChange={handleChange}
-            autoComplete='current-password'
-            type='password'
-            name='password'
-            id='password'
-            required
-          />
-        </div>
+    <Flex h={'80vh'} justifyContent={'center'} alignItems={'center'}>
+      <Flex direction={'column'} background={'gray.200'} p={12} rounded={6}>
+        <Heading mb={6}>Register</Heading>
+        <form onSubmit={handleSubmit}>
+          <FormControl isRequired>
+            <FormLabel htmlFor='username'>Username:</FormLabel>
+            <Input
+              onChange={handleChange}
+              autoComplete='username'
+              placeholder='John Doe'
+              variant={'filled'}
+              mb={4}
+              type='text'
+              name='username'
+              id='username'
+            />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel htmlFor='email'>Email:</FormLabel>
+            <Input
+              onChange={handleChange}
+              autoComplete='email'
+              placeholder='johndoe@email.com'
+              variant={'filled'}
+              mb={4}
+              type='email'
+              name='email'
+              id='email'
+            />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel htmlFor='password'>Password:</FormLabel>
+            <Input
+              onChange={handleChange}
+              autoComplete='current-password'
+              placeholder='********'
+              variant={'filled'}
+              mb={6}
+              type='password'
+              name='password'
+              id='password'
+            />
+          </FormControl>
 
-        <button className='btn' type='submit'>
-          Register
-        </button>
-      </form>
-    </div>
+          <Button colorScheme={'orange'} type='submit'>
+            Sign Up
+          </Button>
+        </form>
+      </Flex>
+    </Flex>
   );
 };
 
