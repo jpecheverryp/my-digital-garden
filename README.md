@@ -3,13 +3,19 @@
 ## Overview
 
 This project is a PKM (Personal Knowledge Management) or Zettelkasten App.
-The purpose is to be able to create notes or slips or inforamtion that you can connect with other notes to create new ideas and find new connections.
+The purpose is to be able to create notes or slips or information that you can connect with other notes to create new ideas and find new connections.
 
 It will be put live as soon as the MVP is ready.
 
 ## Images
 
 ### Pre-MVP
+
+- February 9th 2022
+
+  #### Login after implementing Chakra UI
+
+  ![Login with Chakra](./assets/images/Login020922.png)
 
 - February 1st 2022
 
