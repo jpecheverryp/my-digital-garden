@@ -1,23 +1,11 @@
-import { Box, Container } from '@chakra-ui/react';
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Box } from '@chakra-ui/react';
+import React from 'react';
 import NoteList from '../components/NoteList';
-import NotesMap from '../components/NotesMap';
-
-import { redirectTo } from '../utils/redirectTo';
 
 interface IState {
   isAuthenticated: boolean;
 }
-const Home: React.FC<IState> = ({ isAuthenticated }) => {
-  let navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (!isAuthenticated) {
-  //     redirectTo(navigate, '/login');
-  //     return;
-  //   }
-  // }, [isAuthenticated]);
+const Home: React.FC<IState> = () => {
   const notes = [
     {
       id: 1,
@@ -52,9 +40,9 @@ const Home: React.FC<IState> = ({ isAuthenticated }) => {
   ];
 
   return (
-    <Container pt={4}>
+    <Box>
       <NoteList notes={notes} />
-    </Container>
+    </Box>
   );
 };
 

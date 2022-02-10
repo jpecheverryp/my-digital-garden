@@ -2,8 +2,6 @@
 import { useEffect, useState } from 'react';
 // Routing
 import { Route, Routes, useNavigate } from 'react-router-dom';
-// Styling
-import './App.css';
 // Libraries and utilities
 import axios from 'axios';
 import { getRefreshToken, setAccessToken } from './utils/cookiesHandler';
@@ -15,6 +13,7 @@ import Login from './screens/Login';
 import Profile from './screens/Profile';
 import Register from './screens/Register';
 import NoteView from './components/NoteView';
+import { Box } from '@chakra-ui/react';
 
 function App() {
   // Needed to redirect
@@ -61,7 +60,7 @@ function App() {
     <div className='App'>
       <Navbar isAuthenticated={data.isAuthenticated} />
 
-      <main className='content'>
+      <Box className='content' pt={3} px={2}>
         <Routes>
           <Route
             path='/'
@@ -75,7 +74,7 @@ function App() {
           <Route path='/register' element={<Register setUser={setUser} />} />
           <Route path='/note/:id' element={<NoteView />} />
         </Routes>
-      </main>
+      </Box>
     </div>
   );
 }

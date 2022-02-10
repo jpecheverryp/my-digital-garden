@@ -1,3 +1,11 @@
+import {
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Heading,
+  Input,
+} from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -42,38 +50,43 @@ const Login: React.FC<IProps> = ({ setUser }) => {
     }
   };
   return (
-    <div className='auth-container'>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor='email'>Email:</label>
-          <input
-            className='form-input'
-            onChange={handleChange}
-            autoComplete='email'
-            type='email'
-            name='email'
-            id='email'
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor='password'>Password:</label>
-          <input
-            className='form-input'
-            onChange={handleChange}
-            autoComplete='current-password'
-            type='password'
-            name='password'
-            id='password'
-            required
-          />
-        </div>
-        <button className='btn' type='submit'>
-          Log In
-        </button>
-      </form>
-    </div>
+    <Flex h={'80vh'} justifyContent={'center'} alignItems={'center'}>
+      <Flex direction={'column'} background={'gray.200'} p={12} rounded={6}>
+        <Heading mb={6}>Log In</Heading>
+        <form onSubmit={handleSubmit}>
+          <FormControl isRequired>
+            <FormLabel htmlFor='email'>Email:</FormLabel>
+            <Input
+              onChange={handleChange}
+              autoComplete='email'
+              placeholder='johndoe@example.com'
+              variant={'filled'}
+              mb={4}
+              type='email'
+              name='email'
+              id='email'
+            />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel htmlFor='password'>Password:</FormLabel>
+            <Input
+              onChange={handleChange}
+              autoComplete='current-password'
+              type='password'
+              name='password'
+              id='password'
+              placeholder='********'
+              variant={'filled'}
+              mb={6}
+            />
+          </FormControl>
+
+          <Button colorScheme={'orange'} type='submit' width={'full'}>
+            Log In
+          </Button>
+        </form>
+      </Flex>
+    </Flex>
   );
 };
 
