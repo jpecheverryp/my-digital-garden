@@ -42,17 +42,3 @@
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-
-.map-container {
-  min-width: 30%;
-  margin: 0 1rem 1rem;
-}
-
-.map {
-  background-color: #d3f8fc;
-  border-radius: 1rem;
-  padding-top: 100%;
-  width: 100%;
-  position: relative;
-}
-/*# sourceMappingURL=App.css.map */

@@ -1,3 +1,4 @@
+import { Box, Container } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NoteList from '../components/NoteList';
@@ -51,13 +52,9 @@ const Home: React.FC<IState> = ({ isAuthenticated }) => {
   ];
 
   return (
-    <section>
-      <h1 className='light-text'>Home</h1>
-      <div className='dashboard-cols'>
-        <NotesMap />
-        <NoteList notes={notes} />
-      </div>
-    </section>
+    <Container pt={4}>
+      <NoteList notes={notes} />
+    </Container>
   );
 };
 
