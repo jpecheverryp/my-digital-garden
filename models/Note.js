@@ -20,17 +20,26 @@ Note.init(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    created_at: {
+    createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: Sequelize.NOW,
+    },
+    userId: {
+      type: DataTypes.UUID,
+
+      allowNull: false,
+      references: {
+        model: 'user',
+        key: 'id',
+      },
     },
   },
   {
     sequelize,
     timestamps: false,
     freezeTableName: true,
-    underscored: true,
+
     modelName: 'note',
   }
 );
