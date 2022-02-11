@@ -65,4 +65,26 @@ router.get('/:id', checkIfUser, async (req, res) => {
   return res.status(200).json(noteData);
 });
 
+//  @route  DETETE /api/notes/:id
+//  @desc   Delete a note
+//  @access private
+router.delete('/:id', auth, async (req, res) => {
+  const user = req.user;
+  console.log(user);
+
+  const note = await Note.findOne({ where: { id: req.params.id } });
+  console.log(note);
+  if (!note) return res.status(404).json({ msg: 'Note not Found' });
+  if (!note.userId === req.user.id) {
+    return res.status(403).json({ msg: 'User is not the Author' });
+  }
+  try {
+    const noteId = note.id;
+    await note.destroy();
+    res.status(200).json({ msg: 'Note Deleted Succesfully', noteId: noteId });
+  } catch (err) {
+    res.status(500).json({ msg: 'server error' });
+  }
+});
+
 module.exports = router;
