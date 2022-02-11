@@ -36,7 +36,7 @@ router.post('/', auth, async (req, res) => {
       text: req.body.text,
       userId: req.user.id,
     });
-    return res.status(200).json(newNote);
+    return res.status(200).json(newNote.id);
   } catch (err) {
     console.log(err);
     return res.status(500).json({ msg: 'Server Error' });

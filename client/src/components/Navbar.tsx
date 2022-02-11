@@ -1,11 +1,13 @@
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Link, Flex, Box, Button } from '@chakra-ui/react';
-
+import { addNewNote } from '../utils/addNewNote';
+import { getAccessToken } from '../utils/cookiesHandler';
 interface IState {
   isAuthenticated: boolean;
 }
 const Navbar: React.FC<IState> = ({ isAuthenticated }) => {
+  let navigate = useNavigate();
   return (
     <Flex
       bg={'gray.400'}
@@ -20,8 +22,13 @@ const Navbar: React.FC<IState> = ({ isAuthenticated }) => {
       {/* Check if authenticated and display different links */}
       {isAuthenticated ? (
         <Box>
-          <Button p={2} mr={2} colorScheme={'blue'}>
-            Add note
+          <Button
+            p={2}
+            mr={2}
+            colorScheme={'blue'}
+            onClick={() => addNewNote(getAccessToken(), navigate)}
+          >
+            Add Note
           </Button>
           <Link as={RouterLink} to={'/profile'}>
             Profile
