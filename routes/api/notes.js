@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Note } = require('../../models');
 const auth = require('../../middleware/auth');
+const checkIfUser = require('../../middleware/checkIfUser');
 
 //  @route  GET /api/notes
 //  @desc   Return all the notes
@@ -46,15 +47,22 @@ router.post('/', auth, async (req, res) => {
 //  @route  GET /api/notes/:id
 //  @desc   Get a single note data
 //  @access public
-router.get('/:id', async (req, res) => {
+router.get('/:id', checkIfUser, async (req, res) => {
+  let user;
+  if (!!req.user) {
+    user = req.user;
+  }
+
   const note = await Note.findOne({
     where: { id: req.params.id },
-    attributes: { exclude: ['userId'] },
   });
   // If the note is not found return 404
   if (!note) return res.status(404).json({ msg: 'Note Not Found' });
-
-  return res.status(200).json(note);
+  const noteData = { ...note.dataValues };
+  if (user.id === note.dataValues.userId) {
+    noteData.isAuthor = true;
+  }
+  return res.status(200).json(noteData);
 });
 
 module.exports = router;
