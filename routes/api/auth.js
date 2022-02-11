@@ -25,10 +25,10 @@ router.post('/', async (req, res) => {
       where: { email: email },
     });
     // Verify if user exists
-    if (!user) return res.status(200).json({ msg: 'User Does Not Exist' });
+    if (!user) return res.status(404).json({ msg: 'User Does Not Exist' });
     // Verify that password is correct
     if (!(await bcrypt.compare(password, user.password))) {
-      return res.status(400).json({ message: 'Invalid Password' });
+      return res.status(401).json({ message: 'Invalid Password' });
     }
     const accessToken = generateAccessToken(user.id, user.username);
     const refreshToken = generateRefreshToken(user.id, user.username);

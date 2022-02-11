@@ -1,7 +1,7 @@
 // React Libraries
 import { useEffect, useState } from 'react';
 // Routing
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 // Libraries and utilities
 import axios from 'axios';
 import { getRefreshToken, setAccessToken } from './utils/cookiesHandler';
@@ -16,9 +16,6 @@ import NoteView from './screens/NoteView';
 import { Box } from '@chakra-ui/react';
 
 function App() {
-  // Needed to redirect
-  let navigate = useNavigate();
-
   const [data, setData] = useState({
     isAuthenticated: false,
     username: '',
