@@ -45,7 +45,6 @@ function App() {
         });
         setAccessToken(data.accessToken);
         setUser(data.username);
-        redirectTo(navigate, '/');
       } catch (error) {
         console.log(error);
       }

@@ -43,4 +43,18 @@ router.post('/', auth, async (req, res) => {
   }
 });
 
+//  @route  GET /api/notes/:id
+//  @desc   Get a single note data
+//  @access public
+router.get('/:id', async (req, res) => {
+  const note = await Note.findOne({
+    where: { id: req.params.id },
+    attributes: { exclude: ['userId'] },
+  });
+  // If the note is not found return 404
+  if (!note) return res.status(404).json({ msg: 'Note Not Found' });
+
+  return res.status(200).json(note);
+});
+
 module.exports = router;
