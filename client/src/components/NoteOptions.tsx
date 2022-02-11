@@ -11,8 +11,10 @@ import {
   ModalOverlay,
   useDisclosure,
 } from '@chakra-ui/react';
+import axios from 'axios';
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { getAccessToken } from '../utils/cookiesHandler';
 import { redirectTo } from '../utils/redirectTo';
 
 const NoteOptions = () => {
@@ -25,8 +27,15 @@ const NoteOptions = () => {
   };
 
   const confirmDelete = () => {
-    const noteId = params.id;
-    console.log(noteId);
+    const url = `/api/notes/${params.id}`;
+    axios
+      .delete(url, {
+        headers: {
+          'x-auth-token': 'Bearer ' + getAccessToken(),
+        },
+      })
+      .then((data) => console.log(data.data))
+      .catch((err) => console.log(err.request));
   };
   return (
     <Box>
