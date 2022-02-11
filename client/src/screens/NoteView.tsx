@@ -1,10 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Heading, Container, Box } from '@chakra-ui/react';
 import { getAccessToken } from '../utils/cookiesHandler';
 import NoteOptions from '../components/NoteOptions';
+import { redirectTo } from '../utils/redirectTo';
 const NoteView = () => {
+  let navigate = useNavigate();
   const params = useParams();
   const [noteData, setNoteData] = useState({
     id: '',
@@ -33,7 +35,12 @@ const NoteView = () => {
           isAuthor: data.isAuthor,
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err.request.status === 404) {
+          redirectTo(navigate, '/');
+        }
+        console.log(err);
+      });
   }, [params.id]);
 
   return (
