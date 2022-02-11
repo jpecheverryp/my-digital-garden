@@ -14,6 +14,7 @@ import Profile from './screens/Profile';
 import Register from './screens/Register';
 import NoteView from './screens/NoteView';
 import { Box } from '@chakra-ui/react';
+import NoteEdit from './screens/NoteEdit';
 
 function App() {
   const [data, setData] = useState({
@@ -66,6 +67,7 @@ function App() {
           <Route path='/login' element={<Login setUser={setUser} />} />
           <Route path='/register' element={<Register setUser={setUser} />} />
           <Route path='/note/:id' element={<NoteView />} />
+          <Route path='/note/:id/edit' element={<NoteEdit />} />
         </Routes>
       </Box>
     </div>
