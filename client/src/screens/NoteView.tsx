@@ -45,8 +45,8 @@ const NoteView = () => {
 
   return (
     <Box>
-      {noteData.isAuthor ? <NoteOptions /> : <></>}
       <Container>
+        {noteData.isAuthor ? <NoteOptions /> : <></>}
         <Heading>{noteData.title}</Heading>
 
         {noteData.text}
