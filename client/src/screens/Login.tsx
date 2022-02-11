@@ -42,7 +42,7 @@ const Login: React.FC<IProps> = ({ setUser }) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const { data, status } = await axios({
+      const { data } = await axios({
         method: 'POST',
         url: '/api/auth',
         headers: {

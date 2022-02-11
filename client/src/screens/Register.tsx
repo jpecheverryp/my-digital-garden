@@ -2,6 +2,7 @@ import {
   Button,
   Flex,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Heading,
   Input,
@@ -26,9 +27,19 @@ const Register: React.FC<IProps> = ({ setUser }) => {
     email: '',
     password: '',
   });
+
+  const [errorData, setErrorData] = useState({
+    errorMessage: '',
+    isError: false,
+    field: '',
+  });
+
   // Change Form state when typing
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (errorData.isError) {
+      setErrorData({ errorMessage: '', isError: false, field: '' });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -49,8 +60,32 @@ const Register: React.FC<IProps> = ({ setUser }) => {
       //Set username in app state
       setUser(data.user.username);
       redirectTo(navigate, '/');
-    } catch (err) {
-      console.log(err);
+    } catch (error: any) {
+      if (error.request.status === 400) {
+        console.log(JSON.parse(error.request.response));
+        if (
+          JSON.parse(error.request.response).msg ===
+          'Username already registered'
+        ) {
+          setErrorData({
+            field: 'username',
+            isError: true,
+            errorMessage: JSON.parse(error.request.response).msg,
+          });
+          return;
+        }
+        if (
+          JSON.parse(error.request.response).msg === 'Email already registered'
+        ) {
+          setErrorData({
+            field: 'email',
+            isError: true,
+            errorMessage: JSON.parse(error.request.response).msg,
+          });
+          return;
+        }
+      }
+      console.log(error);
     }
   };
   return (
@@ -58,47 +93,56 @@ const Register: React.FC<IProps> = ({ setUser }) => {
       <Flex direction={'column'} background={'gray.200'} p={12} rounded={6}>
         <Heading mb={6}>Register</Heading>
         <form onSubmit={handleSubmit}>
-          <FormControl isRequired>
+          <FormControl
+            isRequired
+            isInvalid={errorData.isError && errorData.field === 'username'}
+          >
             <FormLabel htmlFor='username'>Username:</FormLabel>
             <Input
               onChange={handleChange}
               autoComplete='username'
               placeholder='John Doe'
               variant={'filled'}
-              mb={4}
               type='text'
               name='username'
               id='username'
             />
+            {<FormErrorMessage>{errorData.errorMessage}</FormErrorMessage>}
           </FormControl>
-          <FormControl isRequired>
-            <FormLabel htmlFor='email'>Email:</FormLabel>
+          <FormControl
+            isRequired
+            isInvalid={errorData.isError && errorData.field === 'email'}
+          >
+            <FormLabel htmlFor='email' mt={6}>
+              Email:
+            </FormLabel>
             <Input
               onChange={handleChange}
               autoComplete='email'
               placeholder='johndoe@email.com'
               variant={'filled'}
-              mb={4}
               type='email'
               name='email'
               id='email'
             />
+            {<FormErrorMessage>{errorData.errorMessage}</FormErrorMessage>}
           </FormControl>
           <FormControl isRequired>
-            <FormLabel htmlFor='password'>Password:</FormLabel>
+            <FormLabel mt={6} htmlFor='password'>
+              Password:
+            </FormLabel>
             <Input
               onChange={handleChange}
               autoComplete='current-password'
               placeholder='********'
               variant={'filled'}
-              mb={6}
               type='password'
               name='password'
               id='password'
             />
           </FormControl>
 
-          <Button colorScheme={'orange'} w={'100%'} type='submit'>
+          <Button mt={6} colorScheme={'orange'} w={'100%'} type='submit'>
             Sign Up
           </Button>
         </form>
