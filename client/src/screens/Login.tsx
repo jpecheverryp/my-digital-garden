@@ -72,7 +72,7 @@ const Login: React.FC<IProps> = ({ setUser }) => {
           field: 'password',
         });
       }
-      console.log(error);
+      console.log(error.request);
     }
   };
   return (
