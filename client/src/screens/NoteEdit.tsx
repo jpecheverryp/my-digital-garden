@@ -68,9 +68,15 @@ const NoteEdit = () => {
       text: noteData.text,
     };
     const token = 'Bearer ' + getAccessToken();
-
-    console.log(token);
-    console.log(submitData);
+    axios
+      .put(getUrl, submitData, {
+        headers: {
+          'Content-Type': 'application/json',
+          'x-auth-token': token,
+        },
+      })
+      .then((data) => redirectTo(navigate, `/note/${params.id}`))
+      .catch((err) => console.log(err));
   };
   return (
     <Box>
