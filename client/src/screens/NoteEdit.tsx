@@ -62,6 +62,16 @@ const NoteEdit = () => {
   const handleCancel = () => {
     redirectTo(navigate, `/note/${params.id}`);
   };
+  const handleSave = () => {
+    const submitData = {
+      title: noteData.title,
+      text: noteData.text,
+    };
+    const token = 'Bearer ' + getAccessToken();
+
+    console.log(token);
+    console.log(submitData);
+  };
   return (
     <Box>
       <Container>
@@ -86,7 +96,9 @@ const NoteEdit = () => {
             <Button mr={2} colorScheme={'gray'} onClick={handleCancel}>
               Cancel
             </Button>
-            <Button colorScheme={'green'}>Save</Button>
+            <Button onClick={handleSave} colorScheme={'green'}>
+              Save
+            </Button>
           </Flex>
         </form>
       </Container>
