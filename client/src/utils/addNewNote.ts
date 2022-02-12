@@ -16,7 +16,7 @@ export function  addNewNote (token: string, navigateFunc: NavigateFunction) {
       }})
       .then(data => {
         const noteId = data.data
-        const url = `/note/${noteId}`
+        const url = `/note/${noteId}/edit`
         redirectTo(navigateFunc, url)
         
       })
