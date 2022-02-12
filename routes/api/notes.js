@@ -36,8 +36,7 @@ router.post('/', auth, async (req, res) => {
     });
     return res.status(200).json(newNote.id);
   } catch (err) {
-    console.log(err);
-    return res.status(500).json({ msg: 'Server Error' });
+    if (err) return res.status(500).json({ msg: 'Server Error' });
   }
 });
 
@@ -45,39 +44,44 @@ router.post('/', auth, async (req, res) => {
 //  @desc   Get a single note data
 //  @access public
 router.get('/:id', checkIfUser, async (req, res) => {
-  let user;
-  if (!!req.user) {
-    user = req.user;
+  try {
+    const note = await Note.findOne({
+      where: { id: req.params.id },
+    });
+    // If the note is not found return 404
+    if (!note) return res.status(404).json({ msg: 'Note Not Found' });
+    const noteData = { ...note.dataValues };
+    if (req.user.id === note.dataValues.userId) {
+      noteData.isAuthor = true;
+    }
+    return res.status(200).json(noteData);
+  } catch (err) {
+    if (err) return res.status(500).json({ msg: 'Server Error' });
   }
-
-  const note = await Note.findOne({
-    where: { id: req.params.id },
-  });
-  // If the note is not found return 404
-  if (!note) return res.status(404).json({ msg: 'Note Not Found' });
-  const noteData = { ...note.dataValues };
-  if (user.id === note.dataValues.userId) {
-    noteData.isAuthor = true;
-  }
-  return res.status(200).json(noteData);
 });
 
 //  @route  DETETE /api/notes/:id
 //  @desc   Delete a note
 //  @access private
 router.delete('/:id', auth, async (req, res) => {
-  const note = await Note.findOne({ where: { id: req.params.id } });
-
-  if (!note) return res.status(404).json({ msg: 'Note not Found' });
-  if (note.userId !== req.user.id) {
-    return res.status(403).json({ msg: 'User is not the Author' });
-  }
   try {
-    const noteId = note.id;
-    await note.destroy();
-    res.status(200).json({ msg: 'Note Deleted Succesfully', noteId: noteId });
+    const note = await Note.findOne({ where: { id: req.params.id } });
+
+    if (!note) return res.status(404).json({ msg: 'Note not Found' });
+    if (note.userId !== req.user.id) {
+      return res.status(403).json({ msg: 'User is not the Author' });
+    }
+    try {
+      const noteId = note.id;
+      await note.destroy();
+      return res
+        .status(200)
+        .json({ msg: 'Note Deleted Succesfully', noteId: noteId });
+    } catch (err) {
+      return res.status(500).json({ msg: 'server error' });
+    }
   } catch (err) {
-    res.status(500).json({ msg: 'server error' });
+    if (err) return res.status(500).json({ msg: 'Server Error' });
   }
 });
 
@@ -85,17 +89,21 @@ router.delete('/:id', auth, async (req, res) => {
 //  @desc   Update a note
 //  @access private
 router.put('/:id', auth, async (req, res) => {
-  const note = await Note.findOne({ where: { id: req.params.id } });
+  try {
+    const note = await Note.findOne({ where: { id: req.params.id } });
 
-  if (note.userId !== req.user.id) {
-    return res.status(403).json({ msg: 'User is not the Author' });
+    if (note.userId !== req.user.id) {
+      return res.status(403).json({ msg: 'User is not the Author' });
+    }
+    note.title = req.body.title;
+    note.text = req.body.text;
+    const noteId = note.id;
+    note.save();
+
+    res.status(200).json({ msg: 'Note Updated Succesfully', noteId: noteId });
+  } catch (err) {
+    if (err) return res.status(500).json({ msg: 'Server Error' });
   }
-  note.title = req.body.title;
-  note.text = req.body.text;
-  const noteId = note.id;
-  note.save();
-
-  res.status(200).json({ msg: 'Note Updated Succesfully', noteId: noteId });
 });
 
 module.exports = router;

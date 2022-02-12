@@ -13,14 +13,14 @@ const { User, Token } = require('../../models');
 //  @desc    Authenticate new user
 //  @access  Public
 router.post('/', async (req, res) => {
-  try {
-    const { email, password } = req.body;
+  const { email, password } = req.body;
 
-    // Simple validation
-    if (!email || !password) {
-      return res.status(400).json({ msg: 'Please enter all fields' });
-    }
-    // Find User
+  // Simple validation
+  if (!email || !password) {
+    return res.status(400).json({ msg: 'Please enter all fields' });
+  }
+  // Find User
+  try {
     const user = await User.findOne({
       where: { email: email },
     });
@@ -51,11 +51,15 @@ router.post('/', async (req, res) => {
 //  @desc    Authenticate new user
 //  @access  Private
 router.get('/user', auth, async (req, res) => {
-  const user = await User.findOne({
-    where: { id: req.user.id },
-    attributes: { exclude: ['password'] },
-  });
-  res.status(200).json(user);
+  try {
+    const user = await User.findOne({
+      where: { id: req.user.id },
+      attributes: { exclude: ['password'] },
+    });
+    res.status(200).json(user);
+  } catch (error) {
+    if (error) return res.status(500).send(err);
+  }
 });
 
 //  @route   DELETE /api/auth/logout
@@ -70,7 +74,7 @@ router.delete('/logout', async (req, res) => {
     });
     return res.sendStatus(204);
   } catch (error) {
-    return res.sendStatus(500);
+    if (err) return res.sendStatus(500);
   }
 });
 
@@ -94,8 +98,7 @@ router.post('/token', async (req, res) => {
     });
     return;
   } catch (error) {
-    console.log(error);
-    res.status(403);
+    if (err) return res.status(403);
   }
 });
 
