@@ -34,7 +34,9 @@ const NoteOptions = () => {
           'x-auth-token': 'Bearer ' + getAccessToken(),
         },
       })
-      .then((data) => console.log(data.data))
+      .then((data) => {
+        redirectTo(navigate, '/');
+      })
       .catch((err) => console.log(err.request));
   };
   return (

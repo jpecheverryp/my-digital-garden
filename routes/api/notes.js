@@ -23,9 +23,6 @@ router.get('/', async (req, res) => {
 //  @desc   Create New Note
 //  @access private
 router.post('/', auth, async (req, res) => {
-  console.log('here');
-  console.log(req.user);
-  console.log(req.body);
   if (!req.body.title || !req.body.text) {
     return res
       .status(400)
@@ -69,11 +66,8 @@ router.get('/:id', checkIfUser, async (req, res) => {
 //  @desc   Delete a note
 //  @access private
 router.delete('/:id', auth, async (req, res) => {
-  const user = req.user;
-  console.log(user);
-
   const note = await Note.findOne({ where: { id: req.params.id } });
-  console.log(note);
+
   if (!note) return res.status(404).json({ msg: 'Note not Found' });
   if (!note.userId === req.user.id) {
     return res.status(403).json({ msg: 'User is not the Author' });
