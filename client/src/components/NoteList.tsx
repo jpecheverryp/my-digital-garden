@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Container } from '@chakra-ui/react';
 import React from 'react';
 import NotePreview from './NotePreview';
 
@@ -11,11 +11,11 @@ interface IProps {
 }
 const NoteList: React.FC<IProps> = ({ notes }) => {
   return (
-    <Box w={'80%'}>
+    <Container maxW={'container.lg'}>
       {notes.map((note, index) => (
         <NotePreview key={index} note={note} />
       ))}
-    </Box>
+    </Container>
   );
 };
 
