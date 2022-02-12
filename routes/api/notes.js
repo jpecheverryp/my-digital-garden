@@ -69,7 +69,7 @@ router.delete('/:id', auth, async (req, res) => {
   const note = await Note.findOne({ where: { id: req.params.id } });
 
   if (!note) return res.status(404).json({ msg: 'Note not Found' });
-  if (!note.userId === req.user.id) {
+  if (note.userId !== req.user.id) {
     return res.status(403).json({ msg: 'User is not the Author' });
   }
   try {
@@ -79,6 +79,23 @@ router.delete('/:id', auth, async (req, res) => {
   } catch (err) {
     res.status(500).json({ msg: 'server error' });
   }
+});
+
+//  @route  PUT /api/notes/:id
+//  @desc   Update a note
+//  @access private
+router.put('/:id', auth, async (req, res) => {
+  const note = await Note.findOne({ where: { id: req.params.id } });
+
+  if (note.userId !== req.user.id) {
+    return res.status(403).json({ msg: 'User is not the Author' });
+  }
+  note.title = req.body.title;
+  note.text = req.body.text;
+  const noteId = note.id;
+  note.save();
+
+  res.status(200).json({ msg: 'Note Updated Succesfully', noteId: noteId });
 });
 
 module.exports = router;
