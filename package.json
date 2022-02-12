@@ -9,6 +9,7 @@
     "start:dev": "concurrently \"npm run server\" \"npm run client\" ",
     "server": "nodemon server.js",
     "client": "cd client && npm run start",
+    "install": "cd client && npm install",
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
@@ -17,8 +18,8 @@
     "url": "git+https://github.com/jpecheverryp/my-digital-garden.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Juan P Echeverry",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/jpecheverryp/my-digital-garden/issues"
   },
