@@ -4,9 +4,13 @@
   "description": "PKM (Personal Knowledge Management)",
   "main": "server.js",
   "scripts": {
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
     "start:dev": "concurrently \"npm run server\" \"npm run client\" ",
     "server": "nodemon server.js",
-    "client": "cd client && npm run start"
+    "client": "cd client && npm run start",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
